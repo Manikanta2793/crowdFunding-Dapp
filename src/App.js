@@ -83,7 +83,7 @@ function App() {
               <Route path="/" element={<HomeLanding walletInfo={walletInfo} />} />
               <Route path="/all-campaigns" element={<AllCampaigns walletInfo={walletInfo} />} />
               <Route path="/create-campaign" element={<CreateCampaign />} />
-              <Route path="/my-campaigns" element={<MyCampaigns />} />
+              <Route path="/my-campaigns" element={<MyCampaigns walletInfo={walletInfo} />} />
               <Route path="/my-investments" element={<MyInvestments walletInfo={walletInfo} />} />
             </Routes>
           </div>

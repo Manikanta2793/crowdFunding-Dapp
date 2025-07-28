@@ -35,7 +35,21 @@ const AllCampaigns = ({ walletInfo }) => {
       allCampaigns = await contract.getcampaigns();
       console.log("Raw campaigns from contract:", allCampaigns);
       const formattedCampaigns = allCampaigns.map((campaign, idx) => {
-        console.log(`Campaign[${idx}]`, campaign);
+        // campaign[10] isActive: true=active, false=paused
+        const now = Math.floor(Date.now() / 1000);
+        const deadline = campaign[5] ? Number(campaign[5].toString()) : 0;
+        let isActive = !!campaign[10] && deadline > now;
+        let status = "Unknown";
+        if (typeof campaign[10] !== 'undefined') {
+          if (!campaign[10]) {
+            status = "Not Active";
+          } else if (deadline <= now) {
+            status = "Not Active";
+            isActive = false;
+          } else {
+            status = "Active";
+          }
+        }
         return {
           title: campaign[1],
           description: campaign[2],
@@ -44,7 +58,8 @@ const AllCampaigns = ({ walletInfo }) => {
           amountCollected: campaign[7] ? campaign[7].toString() : "0",
           minContribution: campaign[4] ? campaign[4].toString() : "0",
           deadline: campaign[5] ? campaign[5].toString() : "0",
-          status: campaign[10] ? (campaign[10] ? "Active" : "Inactive") : "Unknown"
+          status,
+          isActive,
         };
       });
       setCampaigns(formattedCampaigns);
@@ -217,11 +232,11 @@ const AllCampaigns = ({ walletInfo }) => {
                       transition: "border-color 0.2s, box-shadow 0.2s",
                       boxShadow: donatingIndex === index ? "0 0 0 2px #3498db33" : "none"
                     }}
-                    disabled={donatingIndex === index}
+                    disabled={donatingIndex === index || !campaign.isActive}
                   />
                   <button
                     onClick={() => donateToCampaign(index, campaign.minContribution)}
-                    disabled={donatingIndex === index}
+                    disabled={donatingIndex === index || !campaign.isActive}
                   >
                     {donatingIndex === index ? "Donating..." : "Donate"}
                   </button>
