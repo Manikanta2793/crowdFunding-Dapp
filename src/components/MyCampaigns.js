@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "../components/MyCampaigns.css";
 import { ethers } from "ethers";
 import { contractABI, contractAddress } from "../utils/contractABI";
@@ -17,29 +17,40 @@ const MyCampaigns = ({ walletInfo }) => {
     }
   }, [walletInfo]);
 
-  const loadMyCampaigns = async () => {
+
+  const loadMyCampaigns = useCallback(async () => {
     try {
       if (!userAddress || !walletInfo?.contract) return;
       const campaigns = await walletInfo.contract.getMyCampaigns(userAddress);
       // [id, Title, Description, GoalAmount, MinimumAmount, deadline, Creator_address, fundsRaised, claimedStatus, category, isActive]
-      const formattedCampaigns = campaigns.map((campaign, idx) => ({
-        id: campaign[0]?.toString(),
-        title: campaign[1],
-        description: campaign[2],
-        category: campaign[9] || "",
-        goal: campaign[3] ? campaign[3].toString() : "0",
-        amountCollected: campaign[7] ? campaign[7].toString() : "0",
-        minContribution: campaign[4] ? campaign[4].toString() : "0",
-        deadline: campaign[5] ? campaign[5].toString() : "0",
-        claimedStatus: campaign[8],
-        isActive: campaign[10],
-      }));
+      const now = Math.floor(Date.now() / 1000);
+      const formattedCampaigns = campaigns.map((campaign, idx) => {
+        const id = campaign[0]?.toString();
+        const goal = campaign[3] ? campaign[3].toString() : "0";
+        const amountCollected = campaign[7] ? campaign[7].toString() : "0";
+        const deadline = campaign[5] ? campaign[5].toString() : "0";
+        const isActive = !!campaign[10] && Number(deadline) > now;
+        const canClaim = (window.BigInt(amountCollected) >= window.BigInt(goal)) && (Number(deadline) <= now || window.BigInt(amountCollected) >= window.BigInt(goal));
+        return {
+          id,
+          title: campaign[1],
+          description: campaign[2],
+          category: campaign[9] || "",
+          goal,
+          amountCollected,
+          minContribution: campaign[4] ? campaign[4].toString() : "0",
+          deadline,
+          claimedStatus: campaign[8],
+          isActive,
+          canClaim,
+        };
+      });
       setMyCampaigns(formattedCampaigns);
     } catch (err) {
       console.error("Error loading campaigns:", err);
       setStatus("Could not fetch your campaigns.");
     }
-  };
+  }, [userAddress, walletInfo]);
 
 
 
@@ -47,7 +58,7 @@ const MyCampaigns = ({ walletInfo }) => {
     if (walletInfo?.contract && userAddress) {
       loadMyCampaigns();
     }
-  }, [walletInfo, userAddress]);
+  }, [walletInfo, userAddress, loadMyCampaigns]);
 
   // Pause campaign
   const handlePause = async (id) => {
@@ -134,10 +145,14 @@ const MyCampaigns = ({ walletInfo }) => {
               )}
               <button
                 onClick={() => handleClaim(campaign.id)}
-                disabled={actionLoading[campaign.id] || campaign.claimedStatus}
-                style={{ background: '#2980b9', color: '#fff', border: 'none', borderRadius: 6, padding: '8px 18px', cursor: campaign.claimedStatus ? 'not-allowed' : 'pointer', opacity: campaign.claimedStatus ? 0.6 : 1 }}
+                disabled={actionLoading[campaign.id] || campaign.claimedStatus || !campaign.canClaim}
+                style={{ background: '#2980b9', color: '#fff', border: 'none', borderRadius: 6, padding: '8px 18px', cursor: (campaign.claimedStatus || !campaign.canClaim) ? 'not-allowed' : 'pointer', opacity: (campaign.claimedStatus || !campaign.canClaim) ? 0.6 : 1 }}
               >
-                {campaign.claimedStatus ? 'Claimed' : (actionLoading[campaign.id] === 'claiming' ? 'Claiming...' : 'Claim')}
+                {campaign.claimedStatus
+                  ? 'Claimed'
+                  : !campaign.canClaim
+                    ? 'Cannot Claim'
+                    : (actionLoading[campaign.id] === 'claiming' ? 'Claiming...' : 'Claim')}
               </button>
             </div>
             <div style={{ marginTop: 8 }}>
