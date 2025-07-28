@@ -1,38 +1,330 @@
-.App {
-  text-align: center;
-}
+/* Modern Crowdfunding DApp Styles */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
+body {
   min-height: 100vh;
+  background: #f5f7fa;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+.background-container {
+  min-height: 100vh;
+  width: 100vw;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.app {
+  display: flex;
+  /* min-height: 100vh; */
+  width: 100vw;
+  /* background: #f5f7fa; */
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 100vh;
+  background: #181c24;
+  color: #fff;
+  box-shadow: 2px 0 16px rgba(52,152,219,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 36px 18px 24px 18px;
+  box-sizing: border-box;
+  z-index: 100;
+  overflow-x: hidden;
+  overflow-y: auto;
+  word-break: break-word;
+}
+.sidebar h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 36px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+.sidebar ul li {
+  margin-bottom: 22px;
+}
+.sidebar ul li:last-child {
+  margin-bottom: 0;
+}
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.08rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+.sidebar ul li a .sidebar-icon {
+  font-size: 1.2em;
+  margin-right: 8px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.sidebar ul li a:hover {
+  background: #23283a;
+  color: #6dd5fa;
+  box-shadow: 0 2px 8px rgba(52,152,219,0.12);
+}
+
+.main-content {
+  margin-left: 220px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: calc(100vw - 220px);
+  min-height: 100vh;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  box-sizing: border-box;
+}
+
+/* Welcome/Hero Section */
+.welcome-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 2.5rem 2rem;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(52,152,219,0.10);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  width: 100%;
+}
+.welcome-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.2;
+}
+.welcome-desc {
+  font-size: 1.18rem;
+  color: #222;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
-.App-link {
-  color: #61dafb;
+/* Connect Wallet Button */
+.header-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 64px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(52,152,219,0.07);
+  z-index: 101;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 36px;
+}
+.connect-wallet {
+  position: fixed;
+  top: 20px;
+  right: 36px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, #3498db 0%, #6dd5fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(52, 152, 219, 0.18);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  font-weight: 600;
+  z-index: 102;
+}
+.connect-wallet:hover {
+  background: linear-gradient(90deg, #2980b9 0%, #00c6ff 100%);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(52,152,219,0.22);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Card Styles */
+.campaign-card, .my-campaign-card, .investment-item {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 16px rgba(52,152,219,0.07);
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  margin-bottom: 2rem;
+  transition: box-shadow 0.2s;
+}
+.campaign-card:hover, .my-campaign-card:hover, .investment-item:hover {
+  box-shadow: 0 6px 24px rgba(52,152,219,0.13);
+}
+
+/* Input Styles */
+input, textarea {
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1.5px solid #3498db;
+  border-radius: 8px;
+  outline: none;
+  background: #f5f7fa;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+}
+input:focus, textarea:focus {
+  border-color: #2980b9;
+  box-shadow: 0 0 0 2px #3498db33;
+}
+
+/* Responsive Layout */
+
+
+@media (max-width: 900px) {
+  .app {
+    flex-direction: column;
+    min-height: 100vh;
   }
-  to {
-    transform: rotate(360deg);
+  .sidebar {
+    position: relative;
+    width: 100vw;
+    height: auto;
+    min-height: unset;
+    border-radius: 0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    box-shadow: 0 2px 8px rgba(52,152,219,0.04);
   }
+  .sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+  .sidebar ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1.2rem;
+    margin-bottom: 0;
+  }
+  .main-content {
+    margin-left: 0;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+  .header-bar {
+    position: static;
+    width: 100vw;
+    height: 64px;
+    box-shadow: none;
+    padding-right: 0;
+  }
+  .connect-wallet {
+    position: static;
+    margin: 16px auto 0 auto;
+    display: block;
+  }
+}
+
+@media (max-width: 600px) {
+  /* .app {
+    flex-direction: column;
+    min-height: 100vh;
+  } */
+  .sidebar {
+    padding: 12px 8px;
+    font-size: 1rem;
+    border-radius: 0;
+    position: relative;
+    width: 100vw;
+    height: auto;
+  }
+  .sidebar h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+  .sidebar ul {
+    gap: 0.7rem;
+  }
+  .main-content {
+    margin-left: 0;
+    padding: 1rem 4px;
+    min-height: 100vh;
+  }
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+  .welcome-desc {
+    font-size: 1rem;
+  }
+  .header-bar {
+    position: static;
+    width: 100vw;
+    height: 64px;
+    box-shadow: none;
+    padding-right: 0;
+  }
+  .connect-wallet {
+    position: static;
+    margin: 16px auto 0 auto;
+    display: block;
+  }
+}
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body, .app, .main-content, .sidebar, .campaign-card, .create-campaign, .my-campaigns, .my-investments-container {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+/* App.css */
+
+
+
+.main-content {
+  flex: 1;
+  margin-left: 220px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  width: calc(100vw - 220px);
+  min-height: 100vh;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  box-sizing: border-box;
+  overflow-y: auto;
 }

@@ -1,0 +1,17 @@
+
+.connect-wallet {
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, #3498db 0%, #6dd5fa 100%);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.connect-wallet:hover {
+  background: linear-gradient(90deg, #2980b9 0%, #00c6ff 100%);
+  transform: translateY(-2px) scale(1.03);
+}

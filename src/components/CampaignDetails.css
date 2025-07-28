@@ -1,0 +1,47 @@
+.campaign-details {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+}
+
+.campaign-details h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.campaign-details p {
+  margin: 8px 0;
+  color: #374151;
+}
+
+.campaign-details input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+
+.campaign-details button {
+  margin-top: 12px;
+  margin-right: 10px;
+  padding: 10px 18px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.campaign-details button:hover {
+  background: #059669;
+}
+
+.status {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #dc2626;
+}

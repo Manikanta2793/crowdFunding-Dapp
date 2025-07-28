@@ -1,0 +1,101 @@
+.all-campaigns {
+  padding: 40px;
+  background-color: #f5f7fa;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+.all-campaigns h2 {
+  font-size: 2.2rem;
+  text-align: center;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+.status {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #d9534f;
+}
+
+.campaigns-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 0 20px;
+}
+
+/* Force 3 cards per row on large screens */
+@media (min-width: 1024px) {
+  .campaigns-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.campaign-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.campaign-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.campaign-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  color: #007acc;
+}
+
+.campaign-card p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.campaign-card strong {
+  color: #333;
+}
+
+/* Donation input field */
+.campaign-card input[type="number"] {
+  margin-top: 10px;
+  margin-bottom: 12px;
+  width: 100%;
+  max-width: 350px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1.5px solid #3498db;
+  border-radius: 8px;
+  background: #f9fbfc;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Donate button */
+.campaign-card button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.campaign-card button:hover {
+  background-color: #2980b9;
+}
+
+.campaign-card button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}

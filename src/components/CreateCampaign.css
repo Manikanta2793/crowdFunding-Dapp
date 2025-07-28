@@ -1,0 +1,95 @@
+/* CreateCampaign.css */
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+}
+
+.create-campaign {
+  max-width: 800px; /* Increased width */
+  background: #ffffff;
+  margin: 50px auto;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.create-campaign h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #222;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.create-campaign form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-campaign label {
+  font-weight: 600;
+  margin: 15px 0 5px;
+  color: #444;
+  font-size: 1rem;
+}
+
+.create-campaign input,
+.create-campaign textarea,
+.create-campaign select {
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+
+.create-campaign input:focus,
+.create-campaign textarea:focus,
+.create-campaign select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.create-campaign textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.create-campaign button {
+  margin-top: 25px;
+  padding: 14px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.create-campaign button:hover {
+  background: #0056b3;
+}
+
+.create-campaign button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+}
+
+
+  .create-campaign {
+    padding: 20px;
+    width: 90vw;
+    margin: 30px auto;
+  }
+
+  .create-campaign h2 {
+    font-size: 1.6rem;
+  }
+

@@ -1,0 +1,61 @@
+.my-campaigns {
+  padding: 40px;
+  /* background-color: #f5f7fa; */
+  font-family: "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+.my-campaigns h2 {
+  font-size: 2.2rem;
+  text-align: center;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+.status {
+  text-align: center;
+  color: #d9534f;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+
+
+/* Force exactly 3 cards per row on desktops */
+/* 
+  .my-campaigns-list {
+    grid-template-columns: repeat(3, 1fr);
+  } */
+
+
+.my-campaign-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #e1e1e1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  width:50vw;
+}
+
+.my-campaign-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.my-campaign-card h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.4rem;
+  color: #007acc;
+}
+
+.my-campaign-card p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.my-campaign-card strong {
+  color: #333;
+}
